@@ -1,0 +1,877 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/jquery-weui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/weui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
+    <style>
+        html,
+        body {
+            position: relative;
+            height: 100%;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            z-index: 99;
+        }
+
+        .nav ul {
+            background: #fff;
+            padding: 0 12px;
+        }
+
+        .nav:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            border-bottom: solid #eeeeee 1px;
+            z-index: 0;
+        }
+
+        .nav li {
+            width: 20%;
+            line-height: 50px;
+            padding: 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #999;
+            position: relative;
+            text-align: center;
+            /*border: 1px solid red;*/
+        }
+
+        .nav li.active {
+            color: #333333;
+        }
+
+        .nav li.active:after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #00bf07;
+            z-index: 1;
+            /*transform: translate(-50%, 0);*/
+        }
+
+        .aui-list .aui-list-item-media {
+            width: 3rem;
+        }
+
+        .notes-add {
+            position: fixed;
+            left: 0.5rem;
+            bottom: 0.5rem;
+            width: 3rem;
+            z-index: 99;
+        }
+
+        textarea {
+            height: 8rem;
+            background-color: #ffffff;
+            padding: 0.5rem;
+        }
+
+        .photos img {
+            display: block;
+            width: 100%;
+        }
+
+        .add-photos>div {
+            width: 100%;
+            height: 5.15rem;
+            line-height: 5.15rem;
+        }
+
+        .add-photos>div .aui-iconfont {
+            font-size: 2rem;
+            color: #ccc;
+        }
+
+        .image-item {
+            position: relative;
+            height: 5.3rem;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        .image-item img {
+            display: block;
+            margin: 0 auto;
+            width: auto;
+            height: 100%;
+        }
+
+        .image-item .delete-btn {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 28px;
+            height: 28px;
+            background-color: rgba(0, 0, 0, 0.7);
+            margin-left: -14px;
+            margin-top: -14px;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 50%;
+        }
+
+        #testfun {
+            margin-top: 30px；auto;
+            text-align: center;
+        }
+
+        #testfun p {
+            margin-bottom: 20px;
+        }
+
+        .myCenter {
+            margin: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            text-align: right;
+            display: inline-block;
+            position: absolute;
+            right: 10px;
+            color: #f00;
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="weui-tab">
+        <div class="weui-tab__bd">
+            <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+                <div class="nav">
+                    <ul class="weui-flex">
+                        <li class="weui-flex__item active">推荐</li>
+                        <li class="weui-flex__item">电视剧</li>
+                        <li class="weui-flex__item">电影</li>
+                        <li class="weui-flex__item">娱乐</li>
+                        <li class="weui-flex__item">综艺</li>
+                    </ul>
+                </div>
+                <div class="swiper-container-w" style="margin-top:50px;">
+                    <div class="swiper-wrapper wrapper">
+                        <div class="swiper-slide slide-wrapper">
+
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+
+                                    <div class="swiper-slide">
+
+                                        <div class="weui-panel weui-panel_access">
+                                            <div class="weui-panel__hd">图文组合列表</div>
+                                            <div class="weui-panel__bd">
+                                                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                                                    <div class="weui-media-box__hd">
+                                                        <img class="weui-media-box__thumb" src="../icon/icon150x150.png">
+                                                    </div>
+                                                    <div class="weui-media-box__bd">
+                                                        <h4 class="weui-media-box__title">标题一</h4>
+                                                        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+                                                    </div>
+                                                </a>
+                                                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                                                    <div class="weui-media-box__hd">
+                                                        <img class="weui-media-box__thumb" src="../icon/icon150x150.png">
+                                                    </div>
+                                                    <div class="weui-media-box__bd">
+                                                        <h4 class="weui-media-box__title">标题二</h4>
+                                                        <p class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="weui-panel__ft">
+                                                <a href="javascript:void(0);" class="weui-cell weui-cell_access weui-cell_link">
+                                                    <div class="weui-cell__bd">查看更多</div>
+                                                    <span class="weui-cell__ft"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!--测试功能  -->
+
+                                        <div id="testfun">
+                                            <p>
+                                                <div class="aui-btn aui-btn-danger aui-btn-block">测试功能</div>
+                                            </p>
+                                            <p>
+                                                <div class="aui-btn aui-btn-success" onclick="openScancer()">open Scancer</div>
+                                            </p>
+                                            <p>
+                                                <div class="aui-btn aui-btn-info" onclick="isInstalleText_wx()">是否安装微信</div>
+                                            </p>
+                                            <p>
+                                                <div class="aui-btn aui-btn-success" onclick="shareText_wx()">微信分享</div>
+                                            </p>
+                                            <p>
+                                                <div class="aui-btn aui-btn-primary" onclick="getData()">获取数据</div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="aui-card-list">
+                                            <div class="aui-card-list-header aui-card-list-user aui-border-b">
+                                                <div class="aui-card-list-user-avatar">
+                                                    <img src="../image/demo4.png" class="aui-img-round" />
+                                                </div>
+                                                <div class="aui-card-list-user-name">
+                                                    <div>AUI</div>
+                                                    <small>1天前</small>
+                                                </div>
+                                                <div class="aui-card-list-user-info">北京朝阳</div>
+                                            </div>
+                                            <div class="aui-card-list-content-padded">
+                                                <img src="../image/l2.png" />
+                                            </div>
+                                            <div class="aui-card-list-footer aui-border-t">
+                                                <div><i class="aui-iconfont aui-icon-note"></i> 666</div>
+                                                <div><i class="aui-iconfont aui-icon-laud"></i> 888</div>
+                                                <div><i class="aui-iconfont aui-icon-star"></i> 888</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="aui-card-list">
+                                            <div class="aui-card-list-header">
+                                                <div><i class="aui-iconfont aui-icon-my aui-text-danger"></i><span class="aui-text-danger"> 最近联系人</span></div>
+                                                <i class="aui-iconfont aui-icon-more"></i>
+                                            </div>
+                                            <div class="aui-card-list-content">
+                                                <ul class="aui-list aui-media-list loadmore">
+                                                    <li class="aui-list-item aui-list-item-middle">
+                                                        <div class="aui-media-list-item-inner">
+                                                            <div class="aui-list-item-media" style="width: 3rem;">
+                                                                <img src="../image/demo5.png" class="aui-img-round">
+                                                            </div>
+                                                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                                                <div class="aui-list-item-text">
+                                                                    <div class="aui-list-item-title aui-font-size-14">AUI</div>
+                                                                    <div class="aui-list-item-right">08:00</div>
+                                                                </div>
+                                                                <div class="aui-list-item-text">
+                                                                    www.auicss.com
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="aui-list-item aui-list-item-middle">
+                                                        <div class="aui-media-list-item-inner">
+                                                            <div class="aui-list-item-media" style="width: 3rem;">
+                                                                <img src="../image/demo1.png" class="aui-img-round">
+                                                            </div>
+                                                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                                                APICloud AUI
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="aui-card-list-footer aui-text-center" id="look_more">
+                                                查看更多
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <ul class="aui-list aui-media-list">
+                                            <li class="aui-list-item">
+                                                <div class="aui-list-item-inner">
+                                                    <div class="aui-list-item-title">多张图片列表一</div>
+                                                    <p>借助栅格来实现图片列表</p>
+                                                    <div class="aui-row aui-row-padded">
+                                                        <div class="aui-col-xs-4">
+                                                            <img src="../image/demo1.png" />
+                                                        </div>
+                                                        <div class="aui-col-xs-4">
+                                                            <img src="../image/demo2.png" />
+                                                        </div>
+                                                        <div class="aui-col-xs-4">
+                                                            <img src="../image/demo3.png" />
+                                                        </div>
+                                                        <div class="aui-col-xs-4">
+                                                            <img src="../image/demo1.png" />
+                                                        </div>
+                                                        <div class="aui-col-xs-4">
+                                                            <img src="../image/demo2.png" />
+                                                        </div>
+                                                        <div class="aui-col-xs-4">
+                                                            <img src="../image/demo3.png" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <ul class="aui-list aui-list-in">
+                                            <li class="aui-list-header">
+                                                带有其他元素的列表
+                                            </li>
+                                            <li class="aui-list-item">
+                                                <div class="aui-list-item-inner">
+                                                    <div class="aui-list-item-title">text</div>
+                                                    <div class="aui-list-item-right">信息</div>
+                                                </div>
+                                            </li>
+                                            <li class="aui-list-item">
+                                                <div class="aui-list-item-inner">
+                                                    <div class="aui-list-item-title">label</div>
+                                                    <div class="aui-list-item-right">
+                                                        <div class="aui-label aui-label-info">标签</div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="aui-list-item">
+                                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                                    <div class="aui-list-item-title">dot</div>
+                                                    <div class="aui-list-item-right">
+                                                        <div class="aui-dot" style="position:relative;top:0; right:0"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="aui-list-item">
+                                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                                    <div class="aui-list-item-title">badge</div>
+                                                    <div class="aui-list-item-right">
+                                                        <div class="aui-badge" style="position:relative;top:0; left:0">88</div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="aui-list-item">
+                                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                                    <div class="aui-list-item-title">badge</div>
+                                                    <div class="aui-list-item-right">
+                                                        <div class="aui-badge" style="position:relative;top:0; left:0"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="aui-list-item">
+                                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                                    <div class="aui-list-item-title">progress</div>
+                                                    <div class="aui-list-item-right">
+                                                        <div class="aui-progress aui-progress aui-progress-xxs" style="width:5rem;">
+                                                            <div class="aui-progress-bar" style="width: 60%;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="aui-list-item">
+                                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                                    <div class="aui-list-item-title">range</div>
+                                                    <div class="aui-list-item-right">
+                                                        <div class="aui-range">
+                                                            <input type="range" class="aui-range" value="30" max="100" min="1" step="1" id="range" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="aui-list-item">
+                                                <div class="aui-list-item-inner">
+                                                    <div class="aui-list-item-title">switch</div>
+                                                    <div class="aui-list-item-right">
+                                                        <input type="checkbox" class="aui-switch" checked>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="aui-list-item">
+                                                <div class="aui-list-item-inner">
+                                                    <div class="aui-list-item-title">radio</div>
+                                                    <div class="aui-list-item-right">
+                                                        <input type="radio" class="aui-radio" checked>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="aui-list-item">
+                                                <div class="aui-list-item-inner">
+                                                    <div class="aui-list-item-title">checkbox</div>
+                                                    <div class="aui-list-item-right">
+                                                        <input type="checkbox" class="aui-checkbox" checked>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="aui-list-item">
+                                                <div class="aui-list-item-inner">
+                                                    <div class="aui-list-item-title">bar-btn</div>
+                                                    <div class="aui-list-item-right">
+                                                        <div class="aui-bar aui-bar-btn aui-bar-btn-sm" style="width:60%;float:right">
+                                                            <div class="aui-bar-btn-item">
+                                                                <i class="aui-iconfont aui-icon-minus"></i>
+                                                            </div>
+                                                            <div class="aui-bar-btn-item">
+                                                                <input type="number" class="aui-input aui-text-center" value="1">
+                                                            </div>
+                                                            <div class="aui-bar-btn-item">
+                                                                <i class="aui-iconfont aui-icon-plus"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tab2" class="weui-tab__bd-item">
+                <ul class="aui-list aui-media-list">
+                    <li class="aui-list-header">
+                        通讯录样式列表
+                    </li>
+                    <li class="aui-list-item aui-list-item-middle">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-media" style="width: 3rem;">
+                                <img src="../image/demo5.png" class="aui-img-round aui-list-img-sm">
+                            </div>
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                <div class="aui-list-item-text">
+                                    <div class="aui-list-item-title aui-font-size-14">APICloud AUI</div>
+                                    <div class="aui-list-item-right">08:00</div>
+                                </div>
+                                <div class="aui-list-item-text">
+                                    www.auicss.com
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item aui-list-item-middle">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-media" style="width: 3rem;">
+                                <img src="../image/liulangnan.png" class="aui-img-round aui-list-img-sm">
+                            </div>
+                            <div class="aui-list-item-inner aui-list-item-arrow">
+                                APICloud AUI
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="tab3" class="weui-tab__bd-item">
+                <ul class="aui-list aui-media-list">
+                    <li class="aui-list-header">
+                        图文列表
+                    </li>
+                    <li class="aui-list-item aui-list-item-arrow">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-text">
+                                    <div class="aui-list-item-title">带有媒体的列表一</div>
+                                    <div class="aui-list-item-right">08:00</div>
+                                </div>
+                                <div class="aui-list-item-text aui-ellipsis-2">
+                                    这里是内容区域，新版中的列表布局可以很轻松的帮助开发者完成常见列表样式。
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-media">
+                                <img src="../image/demo1.png">
+                            </div>
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-text">
+                                    <div class="aui-list-item-title">带有媒体的列表二</div>
+                                    <div class="aui-list-item-right">08:00</div>
+                                </div>
+                                <div class="aui-list-item-text">
+                                    在下方我们加入了aui-info信息条
+                                </div>
+                            </div>
+                        </div>
+                        <div class="aui-info" style="padding-top:0">
+                            <div class="aui-info-item">
+                                <img src="../image/liulangnan.png" style="width:1rem" class="aui-img-round" /><span class="aui-margin-l-5">流浪男</span>
+                            </div>
+                            <div class="aui-info-item">2015-07-14 10:31</div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-media">
+                                <img src="../image/demo1.png">
+                            </div>
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-text">
+                                    <div class="aui-list-item-title">带有媒体的列表二</div>
+                                    <div class="aui-list-item-right">08:00</div>
+                                </div>
+                                <div class="aui-list-item-text">
+                                    这里是内容区域，新版中的列表布局可以很轻松的帮助开发者完成常见列表样式。
+                                </div>
+                                <div class="aui-info aui-margin-t-5" style="padding:0">
+                                    <div class="aui-info-item">
+                                        <img src="../image/liulangnan.png" style="width:1rem" class="aui-img-round" /><span class="aui-margin-l-5">流浪男</span>
+                                    </div>
+                                    <div class="aui-info-item">2015-07-14 10:31</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="aui-list-item">
+                        <div class="aui-media-list-item-inner">
+                            <div class="aui-list-item-inner">
+                                <div class="aui-list-item-title">媒体项右侧显示</div>
+                                <div class="aui-list-item-text">
+                                    这里是内容区域，新版中的列表布局可以很轻松的帮助开发者完成常见列表样式。
+                                </div>
+                            </div>
+                            <div class="aui-list-item-media">
+                                <img src="../image/demo4.png">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="tab4" class="weui-tab__bd-item">
+                <div class="aui-timeline">
+                    <div class="aui-timeline-item-header">2017年1月8日</div>
+                    <div class="myCenter" onclick="openMyCenter();">个人中心</div>
+                    <div class="aui-timeline-item">
+                        <div class="aui-timeline-item-label aui-bg-info text-light">NO.1</div>
+                        <div class="aui-timeline-item-inner">
+                            <div class="aui-card-list">
+                                <div class="aui-card-list-header aui-border-b">
+                                    <div>时间轴回来了</div>
+                                    <i class="aui-iconfont aui-icon-star aui-text-danger"></i>
+                                </div>
+                                <div class="aui-card-list-content-padded">
+                                    时间轴重新回归了，跟卡片列表布局结合可以完成丰富的布局样式
+                                    <img src="../image/l1.png">
+                                </div>
+                                <div class="aui-card-list-footer aui-border-t aui-font-size-12">
+                                    <div><i class="aui-iconfont aui-icon-note aui-font-size-14"></i> 666</div>
+                                    <div><i class="aui-iconfont aui-icon-laud aui-font-size-14"></i> 888</div>
+                                    <div><i class="aui-iconfont aui-icon-star aui-font-size-14"></i> 888</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aui-timeline-item">
+                        <div class="aui-timeline-item-label-icon aui-bg-danger">
+                            <i class="aui-iconfont aui-icon-like text-light"></i>
+                        </div>
+                        <div class="aui-timeline-item-inner">
+                            <div class="aui-card-list">
+                                <div class="aui-card-list-content-padded">
+                                    AUI一直在努力，并会持久的更新下去，更方便快速的完成布局。感谢一路有大家的陪伴！！！🌹🌹🌹🌹🌹🌹
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aui-timeline-item">
+                        <div class="aui-timeline-item-label aui-bg-warning text-light">NO.2</div>
+                        <div class="aui-timeline-item-inner">
+                            <div class="aui-card-list">
+                                <div class="aui-card-list-header aui-border-b">更好的组合模式</div>
+                                <div class="aui-card-list-content-padded">
+                                    <div class="aui-row aui-row-padded">
+                                        <div class="aui-col-xs-4">
+                                            <img src="../image/demo1.png" />
+                                        </div>
+                                        <div class="aui-col-xs-4">
+                                            <img src="../image/demo2.png" />
+                                        </div>
+                                        <div class="aui-col-xs-4">
+                                            <img src="../image/demo3.png" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="aui-timeline-item">
+                        <div class="aui-timeline-item-label aui-bg-success text-light">NO.3</div>
+                        <div class="aui-timeline-item-inner">
+                            <div class="aui-card-list">
+                                <div class="aui-card-list-header aui-border-b">更好的组合模式</div>
+                                <div class="aui-card-list-content">
+                                    <ul class="aui-list aui-media-list aui-list-noborder">
+                                        <li class="aui-list-item aui-list-item-middle">
+                                            <div class="aui-media-list-item-inner">
+                                                <div class="aui-list-item-media" style="width: 2.6rem;">
+                                                    <img src="../image/demo5.png" class="aui-img-round">
+                                                </div>
+                                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                                    <div class="aui-list-item-text">
+                                                        <div class="aui-list-item-title aui-font-size-14">AUI</div>
+                                                        <div class="aui-list-item-right">08:00</div>
+                                                    </div>
+                                                    <div class="aui-list-item-text">
+                                                        www.auicss.com
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="aui-list-item aui-list-item-middle">
+                                            <div class="aui-media-list-item-inner">
+                                                <div class="aui-list-item-media" style="width: 2.6rem;">
+                                                    <img src="../image/demo1.png" class="aui-img-round">
+                                                </div>
+                                                <div class="aui-list-item-inner aui-list-item-arrow">
+                                                    APICloud AUI
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="aui-card-list-footer aui-text-center aui-border-t">
+                                    查看更多
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-tabbar">
+            <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
+                <!-- <span class="weui-badge" style="position: absolute;top: .2em;right: 3.5em;">8</span> -->
+                <div class="weui-tabbar__icon">
+                    <img src="../image/images/4.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">首页</p>
+            </a>
+            <a href="#tab2" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="../image/images/1.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">通讯录</p>
+            </a>
+            <a href="#tab3" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="../image/images/9.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">图文介绍</p>
+            </a>
+            <a href="#tab4" class="weui-tabbar__item">
+                <div class="weui-tabbar__icon">
+                    <img src="../image/images/3.png" alt="">
+                </div>
+                <p class="weui-tabbar__label">时间轴</p>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../script/jquery-weui.js"></script>
+<script type="text/javascript" src="../script//swiper.jquery.min.js"></script>
+<script>
+    $(function() {
+        var height = $(window).height() - 145;
+        // console.log(height);
+        var mySwiperW = new Swiper('.swiper-container-w', {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            freeMode: true,
+            onTouchEnd: function(swiper) {
+                var _viewHeight = document.getElementsByClassName('swiper-wrapper')[0].offsetHeight;
+                var _contentHeight = document.getElementsByClassName('swiper-slide')[0].offsetHeight;
+            }
+        })
+        var mySwiper = new Swiper('.swiper-container', {
+            onTransitionEnd: function(swiper) {
+                $('.nav li').eq(mySwiper.activeIndex).addClass('active').siblings('li').removeClass('active');
+                $('.wrapper').css('transform', 'translate3d(0px, 0px, 0px)')
+
+                $('.swiper-container .swiper-slide-active').css('height', 'auto').siblings('.swiper-slide').css({
+                    'height': 0
+                });
+
+                console.log($('.swiper-container-w .swiper-slide-active').css('height'));
+                mySwiperW.update();
+            }
+        })
+
+        $('.nav li').click(function() {
+            $(this).addClass('active').siblings('li').removeClass('active');
+            mySwiper.slideTo($(this).index(), 500, false)
+            $('.swiper-container .swiper-slide-active').css('height', 'auto').siblings('.swiper-slide').css({
+                'height': 0
+            });
+            mySwiperW.update();
+        });
+        $('#look_more').click(function() {
+            $('#look_more').html('<i class="weui-loading"></i>正在加载');
+            setTimeout(function() {
+                for (var i = 0; i < 1; i++) {
+                    var more = [];
+                    more.push('<li class="aui-list-item aui-list-item-middle">');
+                    more.push('<div class="aui-media-list-item-inner">');
+                    more.push('<div class="aui-list-item-media" style="width: 3rem;"><img src="../image/demo5.png" class="aui-img-round"></div>');
+                    more.push('<div class="aui-list-item-inner aui-list-item-arrow"><div class="aui-list-item-text">');
+                    more.push('<div class="aui-list-item-title aui-font-size-14">AUI</div><div class="aui-list-item-right">08:00</div></div>');
+                    more.push('<div class="aui-list-item-text">www.auicss.com</div></div>');
+                    more.push('</div></li>');
+
+                    more.push('<li class="aui-list-item aui-list-item-middle">');
+                    more.push('<div class="aui-media-list-item-inner">');
+                    more.push('<div class="aui-list-item-media" style="width: 3rem;"><img src="../image/demo1.png" class="aui-img-round"></div>');
+                    more.push('<div class="aui-list-item-inner aui-list-item-arrow">APICloud AUI</div>');
+                    more.push('</div></li>');
+                    $(".loadmore").append(more.join(''));
+                }
+                $("#look_more").html('查看更多');
+                //mySwiperW.update(); // 外层swiper重新计算高度;
+            }, 500);
+
+        })
+    })
+</script>
+<script type="text/javascript">
+    var wx;
+    apiready = function() {
+        // var header = $api.byId('header')
+        // $api.fixStatusBar(header);
+        // var headerPos = $api.offset(header);
+        //   api.setStatusBarStyle({
+        //      style: 'dark',
+        //      color: '#6ab494'
+        //  });
+
+    };
+
+    function openMyCenter() {
+        api.openWin({
+            name: 'mine_win',
+            url: './mine_win.html',
+            rect: {
+                x: 0,
+                y: 0,
+                w: 'auto',
+                h: 'auto'
+            },
+            pageParam: {
+                name: 'test'
+            },
+            bounces: true,
+            bgColor: 'rgba(0,0,0,0)',
+            vScrollBarEnabled: true,
+            hScrollBarEnabled: true
+        });
+
+    }
+
+    function getData() {
+        api.ajax({
+            url: 'https://5b5dc0ff16bbee0014bc8a72.mockapi.io/api/v1/records',
+            method: 'get',
+            data: '',
+            dataType: 'json',
+            returnAll: false
+        }, function(ret, err) {
+            if (ret) {
+                var retData = JSON.stringify(ret)
+                api.alert({
+                    msg: retData
+                });
+            } else {
+                api.alert({
+                    msg: ('错误码' + err.code + '错误信息' + err.msg + '网络状态码' + err.statusCode)
+                });
+            }
+        });
+    }
+
+    function isInstalleText_wx() {
+        var wx = api.require('wx');
+        wx.isInstalled(function(ret, err) {
+            if (ret.installed) {
+                alert("当前设备已安装微信客户端");
+            } else {
+                alert('当前设备未安装微信客户端');
+            }
+        });
+    }
+
+    function shareText_wx() {
+        var wx = api.require('wx');
+        wx.shareText({
+            //  apiKey: '',
+            scene: 'timeline',
+            text: '我分享的文本'
+        }, function(ret, err) {
+            if (ret.status) {
+                alert('分享成功');
+            } else {
+                alert(err.code);
+            }
+        });
+    }
+
+    function fnOpenCitySelectFrame() {
+        api.openFrame({
+            name: 'cityselect_frame',
+            url: './cityselect_frame.html',
+            rect: {
+                x: 0,
+                y: 75,
+                w: 'auto',
+                h: 'auto'
+            },
+            pageParam: {
+                name: 'test'
+            },
+            bounces: true,
+            bgColor: 'rgba(0,0,0,0)',
+            vScrollBarEnabled: true,
+            hScrollBarEnabled: true
+        });
+    }
+
+    function fnOpenPersonCenterWin() {
+        api.openWin({
+            name: 'login',
+            url: './login.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+
+    }
+
+    function openScancer() {
+        var FNScanner = api.require('FNScanner');
+        FNScanner.open({
+            autorotation: true
+        }, function(ret, err) {
+            if (ret) {
+                alert(JSON.stringify(ret));
+            } else {
+                alert(JSON.stringify(err));
+            }
+        });
+    }
+</script>
