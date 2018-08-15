@@ -17,18 +17,18 @@
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript">
     apiready = function(){
-        // api.parseTapmode();
-        // var header = $api.byId('aui-header');
-        // $api.fixStatusBar(header);
-        // var headerPos = $api.offset(header);
-        // var body_h = $api.offset($api.dom('body')).h;
+        api.parseTapmode();
+        var header = $api.byId('aui-header');
+        $api.fixStatusBar(header);
+        var headerPos = $api.offset(header);
+        var body_h = $api.offset($api.dom('body')).h;
         api.openFrame({
             name: 'login_frm',
             url: 'login_frm.html',
             bounces: true,
             rect: {
                 x: 0,
-                y: '60px',
+                y: body_h,
                 w: 'auto',
                 h: 'auto'
             }
