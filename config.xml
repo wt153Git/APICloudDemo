@@ -12,7 +12,7 @@
 	<preference name="appBackground" value="rgba(0,0,0,0.0)"/>
 	<preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
 	<preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
-	<preference name="hScrollBarEnabled" value="false"/>
+	<preference name="hScrollBarEnabled" value="true"/>
 	<preference name="vScrollBarEnabled" value="false"/>
 	<preference name="autoLaunch" value="true"/>
 	<preference name="fullScreen" value="false"/>
@@ -27,5 +27,5 @@
 	<permission name="fileSystem" />
 	<permission name="internet" />
 	<permission name="bootCompleted" />
-	<permission name="hardware" />
+	<permission name="hardware" />  <preference name="backgroundMode" value="audio"/>
 </widget>

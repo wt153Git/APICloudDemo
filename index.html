@@ -280,40 +280,9 @@
                                             <img id="ad" src="./image/eat.png" style="width:300px;height:200px;" alt="">
                                             <div style="margin-top:15px;">
                                                 <h1>听个音药</h1>
-                                                <audio  src="./res/music.mp3"></audio>
-                                                <span class="myVoice"><i class="myVoiBefore"></i></span>
+                                                <span class="startMusic"><i class="myVoiBefore"></i></span>
                                             </div>
                                         </div>
-                                        <script>
-                                             var v = document.querySelector('video');
-                                             var a = document.querySelector('audio');
-                                            v.onpause = function() {
-                                                ad.style.display = 'block';
-                                            }
-                                            v.onplay = function() {
-                                                ad.style.display = 'none';
-                                            }
-                                            document.getElementById("ad").onclick = function() {
-                                                v.play();
-                                                ad.style.display = 'none';
-                                            }
-                                            v.addEventListener('play', function() {
-                                                a.pause();
-                                                $(".myVoice").find(".myVoiBefore").removeClass('myVoiAfter');
-                                            });
-                                            a.addEventListener('play', function() {
-                                                v.pause();
-                                            });
-                                            $(".myVoice").on('click', function() {
-                                                $(this).find(".myVoiBefore").addClass('myVoiAfter');
-                                                if (!a.paused) {
-                                                    a.pause();
-                                                    $(".myVoiAfter").removeClass('myVoiAfter')
-                                                } else {
-                                                    a.play();
-                                                }
-                                            });
-                                        </script>
                                     </div>
                                 </div>
                             </div>
@@ -500,6 +469,7 @@
         </div>
     </div>
 </body>
+
 </html>
 <script type="text/javascript" src="./script/api.js"></script>
 <script type="text/javascript" src="./script/jquery-weui.js"></script>
@@ -632,7 +602,30 @@
         } else {
             $(".weui-tabbar__label.mine").text("我的");
         }
-    };
+        var audio = api.require('audio');
+
+
+        $(".startMusic").on('click', function() {
+            var TOF = $('.myVoiBefore').hasClass('myVoiAfter');
+            if (!TOF) {
+                audio.play({
+                    path: 'widget://res/music.mp3'
+                }, function(ret, err) {
+                    if (ret) {
+                        // alert(JSON.stringify(ret));
+                    } else {
+                        // alert(JSON.stringify(err));
+                    }
+                });
+                $('.myVoiBefore').addClass('myVoiAfter');
+            } else {
+                audio.pause();
+                $('.myVoiBefore').removeClass('myVoiAfter');
+            }
+        });
+    }
+
+
 
     function getData() {
         api.ajax({
