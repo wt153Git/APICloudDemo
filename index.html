@@ -94,7 +94,6 @@
             height: 65px;
             line-height: 65px;
             background-color: #F5F5F5;
-            color: #F00;
         }
 
         .timeFix div {
@@ -105,10 +104,12 @@
             border: none;
             height: 0;
         }
+
         .noline:after {
             border: none;
             height: 0;
         }
+
         @media screen and (-webkit-min-device-pixel-ratio: 1.5) {
             #noTopLine {
                 background-size: 100% 0px;
@@ -144,6 +145,10 @@
             margin-right: 5px;
             background: url("./image/myvoice-pause@2x.png") no-repeat;
             background-size: cover;
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -271,45 +276,40 @@
                                     <div class="swiper-slide">
                                         <div style="margin-top:50px;text-align:center;position:relative;">
                                             <h1>视频欣赏</h1>
-                                            <div onclick="openVideo()">播放视频</div>
                                             <video src="./res/1.mp4" width="300" height="200" controls loop poster="./image/liulangnan.png"></video>
                                             <img id="ad" src="./image/eat.png" style="width:300px;height:200px;" alt="">
                                             <div style="margin-top:15px;">
                                                 <h1>听个音药</h1>
-                                                <!-- <audio  src="./res/music.mp3"></audio> -->
-                                                <span class="myVoice" onclick="openMusic()"><i class="myVoiBefore"></i></span>
+                                                <audio  src="./res/music.mp3"></audio>
+                                                <span class="myVoice"><i class="myVoiBefore"></i></span>
                                             </div>
                                         </div>
                                         <script>
-                                            // var v = document.querySelector('video');
-                                            // var a = document.querySelector('audio');
-                                            // v.onpause = function() {
-                                            //     ad.style.display = 'block';
-                                            // }
-                                            // v.onplay = function() {
-                                            //     ad.style.display = 'none';
-                                            // }
-                                            // document.getElementById("ad").onclick = function() {
-                                            //     v.play();
-                                            //     ad.style.display = 'none';
-                                            // }
-                                            // v.addEventListener('play', function() {
-                                            //     a.pause();
-                                            //     $(".myVoice").find(".myVoiBefore").removeClass('myVoiAfter');
-                                            // });
-                                            // a.addEventListener('play', function() {
-                                            //     v.pause();
-                                            //
-                                            // });
+                                             var v = document.querySelector('video');
+                                             var a = document.querySelector('audio');
+                                            v.onpause = function() {
+                                                ad.style.display = 'block';
+                                            }
+                                            v.onplay = function() {
+                                                ad.style.display = 'none';
+                                            }
+                                            document.getElementById("ad").onclick = function() {
+                                                v.play();
+                                                ad.style.display = 'none';
+                                            }
+                                            v.addEventListener('play', function() {
+                                                a.pause();
+                                                $(".myVoice").find(".myVoiBefore").removeClass('myVoiAfter');
+                                            });
+                                            a.addEventListener('play', function() {
+                                                v.pause();
+                                            });
                                             $(".myVoice").on('click', function() {
-
                                                 $(this).find(".myVoiBefore").addClass('myVoiAfter');
-
                                                 if (!a.paused) {
                                                     a.pause();
                                                     $(".myVoiAfter").removeClass('myVoiAfter')
                                                 } else {
-
                                                     a.play();
                                                 }
                                             });
@@ -433,140 +433,73 @@
             </div>
             <div id="tab4" class="weui-tab__bd-item">
                 <div class="timeFix weui-flex">
-                    <div class=" weui-flex__item">2017年1月8日</div>
-                    <div class="weui-flex__item" onclick="openMyCenter();">个人中心</div>
+                    <div class=" weui-flex__item">欢迎登录</div>
+                    <!-- <div class=" weui-flex__item">2017年1月8日</div>
+                    <div class="weui-flex__item" onclick="openMyCenter();">个人中心</div> -->
                 </div>
-                <div class="aui-timeline" style="padding-top:60px;">
+                <div class="weui-flex" style="margin-top:60px;">
+                    <div class="weui-flex__item">
+                        <div class="weui-cells weui-cells_form">
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input" type="tel" id="telnumber" placeholder="请输入手机号">
 
-                    <div class="aui-timeline-item">
-                        <div class="aui-timeline-item-label aui-bg-info text-light">NO.1</div>
-                        <div class="aui-timeline-item-inner">
-                            <div class="aui-card-list">
-                                <div class="aui-card-list-header aui-border-b">
-                                    <div>时间轴回来了</div>
-                                    <i class="aui-iconfont aui-icon-star aui-text-danger"></i>
                                 </div>
-                                <div class="aui-card-list-content-padded">
-                                    时间轴重新回归了，跟卡片列表布局结合可以完成丰富的布局样式
-                                    <img src="./image/l1.png">
+                                <span class="warn_PhNum hidden" style="font-size:10px;color:red;"></span>
+                            </div>
+                            <div class="weui-cell weui-cell_vcode">
+                                <div class="weui-cell__hd">
+                                    <label class="weui-label">验证码</label>
                                 </div>
-                                <div class="aui-card-list-footer aui-border-t aui-font-size-12">
-                                    <div><i class="aui-iconfont aui-icon-note aui-font-size-14"></i> 666</div>
-                                    <div><i class="aui-iconfont aui-icon-laud aui-font-size-14"></i> 888</div>
-                                    <div><i class="aui-iconfont aui-icon-star aui-font-size-14"></i> 888</div>
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input" type="tel" placeholder="请输入验证码">
+                                </div>
+                                <div class="weui-cell__ft">
+                                    <button class="weui-vcode-btn getcode">获取验证码</button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="aui-timeline-item">
-                        <div class="aui-timeline-item-label-icon aui-bg-danger">
-                            <i class="aui-iconfont aui-icon-like text-light"></i>
-                        </div>
-                        <div class="aui-timeline-item-inner">
-                            <div class="aui-card-list">
-                                <div class="aui-card-list-content-padded">
-                                    AUI一直在努力，并会持久的更新下去，更方便快速的完成布局。感谢一路有大家的陪伴！！！🌹🌹🌹🌹🌹🌹
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="aui-timeline-item">
-                        <div class="aui-timeline-item-label aui-bg-warning text-light">NO.2</div>
-                        <div class="aui-timeline-item-inner">
-                            <div class="aui-card-list">
-                                <div class="aui-card-list-header aui-border-b">更好的组合模式</div>
-                                <div class="aui-card-list-content-padded">
-                                    <div class="aui-row aui-row-padded">
-                                        <div class="aui-col-xs-4">
-                                            <img src="./image/demo1.png" />
-                                        </div>
-                                        <div class="aui-col-xs-4">
-                                            <img src="./image/demo2.png" />
-                                        </div>
-                                        <div class="aui-col-xs-4">
-                                            <img src="./image/demo3.png" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="aui-timeline-item">
-                        <div class="aui-timeline-item-label aui-bg-success text-light">NO.3</div>
-                        <div class="aui-timeline-item-inner">
-                            <div class="aui-card-list">
-                                <div class="aui-card-list-header aui-border-b">更好的组合模式</div>
-                                <div class="aui-card-list-content">
-                                    <ul class="aui-list aui-media-list aui-list-noborder">
-                                        <li class="aui-list-item aui-list-item-middle">
-                                            <div class="aui-media-list-item-inner">
-                                                <div class="aui-list-item-media" style="width: 2.6rem;">
-                                                    <img src="./image/demo5.png" class="aui-img-round">
-                                                </div>
-                                                <div class="aui-list-item-inner aui-list-item-arrow">
-                                                    <div class="aui-list-item-text">
-                                                        <div class="aui-list-item-title aui-font-size-14">AUI</div>
-                                                        <div class="aui-list-item-right">08:00</div>
-                                                    </div>
-                                                    <div class="aui-list-item-text">
-                                                        www.auicss.com
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="aui-list-item aui-list-item-middle">
-                                            <div class="aui-media-list-item-inner">
-                                                <div class="aui-list-item-media" style="width: 2.6rem;">
-                                                    <img src="./image/demo1.png" class="aui-img-round">
-                                                </div>
-                                                <div class="aui-list-item-inner aui-list-item-arrow">
-                                                    APICloud AUI
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="aui-card-list-footer aui-text-center aui-border-t">
-                                    查看更多
-                                </div>
-                            </div>
+                        </div>
+                        <div class="weui-flex__item">
+                            <p class="weui-btn-area" style="margin-top:30px;">
+                                <a href="javascript:;" class="weui-btn weui-btn_primary">登录</a>
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="weui-tabbar" id="footer">
-            <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
-                <!-- <span class="weui-badge" style="position: absolute;top: .2em;right: 3.5em;">8</span> -->
-                <div class="weui-tabbar__icon">
-                    <img src="./image/images/4.png" alt="">
-                </div>
-                <p class="weui-tabbar__label">首页</p>
-            </a>
-            <a href="#tab2" class="weui-tabbar__item">
-                <div class="weui-tabbar__icon">
-                    <img src="./image/images/1.png" alt="">
-                </div>
-                <p class="weui-tabbar__label">通讯录</p>
-            </a>
-            <a href="#tab3" class="weui-tabbar__item">
-                <div class="weui-tabbar__icon">
-                    <img src="./image/images/9.png" alt="">
-                </div>
-                <p class="weui-tabbar__label">图文介绍</p>
-            </a>
-            <a href="#tab4" class="weui-tabbar__item">
-                <div class="weui-tabbar__icon">
-                    <img src="./image/images/3.png" alt="">
-                </div>
-                <p class="weui-tabbar__label">时间轴</p>
-            </a>
+            <div class="weui-tabbar" id="footer">
+                <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
+                    <!-- <span class="weui-badge" style="position: absolute;top: .2em;right: 3.5em;">8</span> -->
+                    <div class="weui-tabbar__icon">
+                        <img src="./image/images/4.png" alt="">
+                    </div>
+                    <p class="weui-tabbar__label">首页</p>
+                </a>
+                <a href="#tab2" class="weui-tabbar__item">
+                    <div class="weui-tabbar__icon">
+                        <img src="./image/images/1.png" alt="">
+                    </div>
+                    <p class="weui-tabbar__label">通讯录</p>
+                </a>
+                <a href="#tab3" class="weui-tabbar__item">
+                    <div class="weui-tabbar__icon">
+                        <img src="./image/images/9.png" alt="">
+                    </div>
+                    <p class="weui-tabbar__label">图文介绍</p>
+                </a>
+                <a href="#tab4" class="weui-tabbar__item">
+                    <div class="weui-tabbar__icon">
+                        <img src="./image/images/3.png" alt="">
+                    </div>
+                    <p class="weui-tabbar__label mine">我的</p>
+                </a>
+            </div>
         </div>
     </div>
 </body>
-
 </html>
 <script type="text/javascript" src="./script/api.js"></script>
 <script type="text/javascript" src="./script/jquery-weui.js"></script>
@@ -692,88 +625,14 @@
         str += '</ul>';
 
         $api.byId('sys-info').innerHTML = str;
+
+        var uid = $api.getStorage('uid');
+        if (uid == null) {
+            $(".weui-tabbar__label.mine").text("未登录");
+        } else {
+            $(".weui-tabbar__label.mine").text("我的");
+        }
     };
-
-    function openMyCenter() {
-        api.openWin({
-            name: 'mine_win',
-            url: './html/mine_win.html',
-            rect: {
-                x: 0,
-                y: 0,
-                w: 'auto',
-                h: 'auto'
-            },
-            pageParam: {
-                name: 'test'
-            },
-            bounces: true,
-            bgColor: 'rgba(0,0,0,0)',
-            vScrollBarEnabled: true,
-            hScrollBarEnabled: true
-        });
-
-    }
-
-    function  openVideo() {
-        var videoPlayer = api.require('videoPlayer');
-        videoPlayer.play({
-            texts: {
-                head: {
-                    title: '顶部文字'
-                }
-            },
-            styles: {
-                head: {
-                    bg: 'rgba(0.5,0.5,0.5,0.7)',
-                    height: 44,
-                    titleSize: 20,
-                    titleColor: '#fff',
-                    backSize: 44,
-                    backImg: 'fs://img/back.png',
-                    setSize: 44,
-                    setImg: 'fs://img/set.png'
-                },
-                foot: {
-                    bg: 'rgba(0.5,0.5,0.5,0.7)',
-                    height: 44,
-                    playSize: 44,
-                    playImg: 'fs://img/back.png',
-                    pauseImg: 'fs://img/back.png',
-                    nextSize: 44,
-                    nextImg: 'fs://img/back.png',
-                    timeSize: 14,
-                    timeColor: '#fff',
-                    sliderImg: 'fs://img/slder.png',
-                    progressColor: '#696969',
-                    progressSelected: '#76EE00'
-                }
-            },
-            path: 'http://7o50kb.com2.z0.glb.qiniucdn.com/c1.1.mp4', //（可选项）字符串类型；文档的路径，支持网络和本地（fs://）路径；默认：未传值时不播放
-            //在 android 平台上不支持 widget://
-            autoPlay: true //（可选项）布尔类型；打开时是否自动播放；默认：true（自动播放）
-        }, function(ret, err) {
-            if (ret) {
-                alert(JSON.stringify(ret));
-            } else {
-                alert(JSON.stringify(err));
-            }
-        });
-    }
-
-
-    function openMusic() {
-        var audio = api.require('audio');
-        audio.play({
-            path: 'res/music.mp3'
-        }, function(ret, err) {
-            if (ret) {
-                alert(JSON.stringify(ret));
-            } else {
-                alert(JSON.stringify(err));
-            }
-        });
-    }
 
     function getData() {
         api.ajax({
@@ -823,15 +682,49 @@
     }
 
     function openScancer() {
-        var FNScanner = api.require('FNScanner');
-        FNScanner.open({
-            autorotation: true
+        api.confirm({
+            title: '二维码',
+            msg: '是否开启',
+            buttons: ['确定', '取消']
         }, function(ret, err) {
-            if (ret) {
-                alert(JSON.stringify(ret));
+            if (ret.buttonIndex == 1) {
+                var FNScanner = api.require('FNScanner');
+                FNScanner.open({
+                    autorotation: true
+                }, function(ret, err) {
+                    // if (ret) { // alert(JSON.stringify(ret)); // } else { // alert(JSON.stringify(err)); // }
+                });
             } else {
-                alert(JSON.stringify(err));
+
             }
         });
     }
+
+    function verificationPNum() {
+        //手机号验证规则
+        var PNumber = /^[1][3,4,5,7,8][0-9]{9}$/;
+        var myNumber = $("#telnumber").val();
+        var regEn = /[`~!@#$%^&*()_+<>?:"{},.\/;='[\]]/im;
+        var regCn = /[·！#￥（——）：；“”‘、，|《。》=？、【】[\]]/im;
+        var warn_PhNum = $(".warn_PhNum");
+
+        if (myNumber != "") {
+            if (!PNumber.test(myNumber) || regEn.test(myNumber) || regCn.test(myNumber)) {
+                warn_PhNum.removeClass("hidden");
+                warn_PhNum.html("请输入正确的手机号码");
+            } else {
+                warn_PhNum.addClass("hidden");
+            }
+        } else if (myNumber == "") {
+            warn_PhNum.removeClass("hidden");
+            warn_PhNum.html("请输入您的的手机号码");
+        } else {
+            warn_PhNum.addClass("hidden");
+        }
+    }
+
+    // 当手机号码框失去焦点时验证手机格式
+    $(".weui-vcode-btn.getcode").click(function() {
+        verificationPNum();
+    });
 </script>
